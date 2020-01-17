@@ -199,6 +199,7 @@
 // });
 describe('test', function(){
     it('test1', function(){
-
+        cy.visit('http://example.cypress.io');
+        cy.contains('type').click();
     })
 });
