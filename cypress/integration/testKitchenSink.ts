@@ -203,3 +203,5 @@ describe('test', function(){
         cy.contains('type').click();
     })
 });
+
+//changes from durim :p
