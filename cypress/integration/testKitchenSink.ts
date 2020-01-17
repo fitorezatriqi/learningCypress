@@ -197,10 +197,17 @@
 //             .siblings().should('have.length',2)
 //     })
 // });
+//----------------------------------Actions-----------------------------------------------------------------------------
 describe('test', function(){
     it('test1', function(){
         cy.visit('http://example.cypress.io');
         cy.contains('type').click();
+
+        cy.get('.action-email')
+            .type('fake@email.com').should('have.value', 'fake@email.com')
+            .type('{leftarrow}{rightarrow}{uparrow}{downarrow}')
+            .type('{del}{selectall}{backspace}');
+
     })
 });
 
