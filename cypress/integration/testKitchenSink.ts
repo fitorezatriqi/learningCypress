@@ -315,7 +315,7 @@ describe('test', function(){
             .trigger('change')
             .get('input[type=range]').siblings('p')
             .should('have.text', '25')
-        
+
     })
 });
 
