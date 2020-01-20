@@ -1,4 +1,4 @@
-//<reference types="Cypress" />
+///<reference types="Cypress" />
 
 // describe('Test', function(){
 //     it('First Test inside the Kitchen sink', function(){
@@ -210,10 +210,112 @@ describe('test', function(){
             .type('{del}{selectall}{backspace}');
         cy.get('.action-disabled')
             .type('disabled error checking', {force: true})
-            .should('have.value', 'disabled error checking')
+            .should('have.value', 'disabled error checking');
 
         //focus()
+        cy.get('.action-focus').focus()
+            .should('have.class', 'focus')
+            .prev().should('have.attr', 'style', 'color: orange;');
 
+        //blur()
+        cy.get('.action-blur').type('About to blur').blur()
+            .should('have.class','error')
+            .prev().should('have.attr','style','color: red;');
+
+        //clear()
+        cy.get('.action-clear').type('Clear this text')
+            .should('have.value','Clear this text')
+            .clear()
+            .should('have.value','');
+
+        //submit()
+        cy.get('.action-form')
+            .find('[type="text"]').type('HALFOFF');
+        cy.get('.action-form').submit()
+            .next().should('contain','Your form has been submitted!');
+
+        //click()
+        cy.get('.action-btn').click();
+        cy.get('#action-canvas').click();
+        cy.get('#action-canvas').click('topLeft');
+        cy.get('#action-canvas').click('top');
+        cy.get('#action-canvas').click('topRight');
+        cy.get('#action-canvas').click('left');
+        cy.get('#action-canvas').click('right');
+        cy.get('#action-canvas').click('bottomLeft');
+        cy.get('#action-canvas').click('bottom');
+        cy.get('#action-canvas').click('bottomRight');
+        //click accepts an x and y coordinate
+        cy.get('#action-canvas')
+            .click(80,75)
+            .click(170,75)
+            .click(80,165)
+            .click(100,185)
+            .click(125,190)
+            .click(150,185)
+            .click(170,165);
+        //click multiple elements by passing multiple: true
+        cy.get('.action-labels>.label').click({multiple: true});
+        //Ignore error checking prior to clicking
+        cy.get('.action-opacity>.btn').click({force:true});
+
+        //doubleclicking()
+        cy.get('.action-div').dblclick().should('not.be.visible');
+        cy.get('.action-input-hidden').should('be.visible');
+
+
+
+        //check()
+        cy.get('.action-checkboxes [type="checkbox"]').not('[disabled]')
+            .check().should('be.checked');
+        cy.get('.action-radios [type="radio"]').not('[disabled]')
+            .check().should('be.checked');
+        cy.get('.action-radios [type="radio"]')
+            .check('radio1').should('be.checked');
+        cy.get('.action-multiple-checkboxes [type="checkbox"]')
+            .check(['checkbox1','checkbox2']).should('be.checked');
+        cy.get('.action-checkboxes [disabled]')
+            .check({force:true}).should('be.checked');
+        cy.get('.action-radios [type="radio"]')
+            .check('radio3', {force: true}).should('be.checked');
+
+        //uncheck()
+        cy.get('.action-check [type="checkbox"]')
+            .not('[disabled]')
+            .uncheck().should('not.be.checked');
+        cy.get('.action-check [type="checkbox"]')
+            .check('checkbox1')
+            .uncheck('checkbox1').should('not.be.checked');
+        cy.get('.action-check [disabled]')
+            .uncheck({force: true}).should('not.be.checked');
+
+        //select()
+        cy.get('.action-select').select('apples');
+        cy.get('.action-select-multiple')
+            .select(['apples', 'bananas','oranges']);
+
+        //scrollIntoView()
+        cy.get('#scroll-horizontal button ')
+            .should('not.be.visible');
+        cy.get('#scroll-horizontal button').scrollIntoView()
+            .should('be.visible');
+        cy.get('#scroll-vertical button').scrollIntoView()
+            .should('be.visible');
+        cy.get('#scroll-both button').scrollIntoView()
+            .should('be.visible');
+
+        //scrollTo()
+        cy.get('#scrollable-vertical').scrollTo(250,250);
+        cy.get('#scrollable-vertical').scrollTo('center', { easing: 'linear' });
+        cy.get('#scrollable-both').scrollTo('center',{duration: 2000});
+
+        //trigger()
+        cy.get('.trigger-input-range')
+            .invoke('val', 25)
+            .trigger('change')
+            .get('input[type=range]').siblings('p')
+            .should('have.text', '25')
+        
     })
 });
 
