@@ -77,7 +77,7 @@ describe('Learning Window, Viewport, Locations, Navigation and Assertion command
             .should('have.html','Column content')
         cy.get('.assertion-table')
             .find('tbody tr:last')
-            .contains('td',/column content/i)
+            .contains('td','Column content')
             .should('be.visible')
 
         //Using .and() function
