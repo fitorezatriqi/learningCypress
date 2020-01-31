@@ -314,7 +314,8 @@ describe('test', function(){
             .invoke('val', 25)
             .trigger('change')
             .get('input[type=range]').siblings('p')
-            .should('have.text', '25')
+            .should('have.text', '25');
+
 
     })
 });

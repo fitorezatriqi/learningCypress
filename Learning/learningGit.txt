@@ -1,0 +1,14 @@
+git init - behet vetem nje here, kur te krijohet projekti, inicializohet folderi per perdorimin e vegles git
+git status - kontrollim i statusit te projektit, nese ka apo jo ndryshime
+git log - shikimi i historise se commitave
+git add .- ndryshimet definohen ne staging area (i merr te gjitha file-at e ndryshuara)
+git add /emriFile.   i merr ndryshimet nga file i caktuar edhe i vendos ne staging area
+git commit -m "" - ruajtja e ndryshimeve nga stagining area lokalisht
+git checkout id - kthehet ne commitin e caktuar
+git checkout . -kthehet ne commitin e fundit
+
+
+git remote add origin https://github.com/fitorezatriqi/learningCypress.git  - ne local e lidh repositoryn online
+git remote -v - adresa me te cilin eshte i lidhur giti local me online repository
+git pull - i mer ndryshimet prej repositoryt online dhe i shkruan lokalisht
+git push - ndryshimet qe jan bere local i vendos ne online repositry

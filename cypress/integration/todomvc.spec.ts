@@ -26,5 +26,35 @@ describe('toggling todos',function(){
         cy.contains('Clear completed').click();
         cy.get('.todo-list').should('not.have.descendants','li');
         cy.get('.todo-list').should('have.not.descendants','li')
+    });
+
+    it('add another tasks',function(){
+        cy.get('.new-todo').type('Task Nr 2{enter}');
+        cy.get('label:first').should('have.text','Task Nr 2');
+        cy.get('.new-todo').type('Task Nr 3{enter}');
+        cy.get('label:first').should('have.text','Task Nr 3');
+        cy.get('.new-todo').type('Task Nr 4{enter}');
+        cy.get('label:first').should('have.text','Task Nr 4');
+        cy.contains('3 items left');
+
+    });
+    // it('deleting tasks',function(){
+    //     cy.get('.destroy:first').click({force:true});
+    //     cy.contains('2 items left');
+    //     cy.get('.destroy:first').click({force:true});
+    //     cy.contains('1 item left')
+    //     cy.get('.destroy').click({force:true});
+    //     cy.get('.new-todo').should('have.attr','placeholder','What needs to be done?');
+    //
+    // })
+    it('deleting tasks via toggle',function(){
+
+        cy.get('.toggle:first').click();
+        cy.contains('2 items left');
+        cy.get('.toggle:last').click();
+        cy.contains('1 item left');
+        cy.contains('Clear completed');
+        cy.get('.toggle:first').click();
+
     })
 });
